@@ -35,7 +35,7 @@ The following Power BI features were incorporated:
           - Right click->List to Table -> Ok  
           - Rename the column name to date and change the data type to Date.  
           - Fetched the Month_NO,Day name,Year and Month-Name.  
-                Month-Year = FORMAT('dim_date'[date].[Date],"MMM-YY")  
+                _Month-Year = FORMAT('dim_date'[date].[Date],"MMM-YY")_    
                 
 •	Dim_market  
    Segregated the main Sales_Data table and added the City name and its corresponding Region(from ChatGpt) to the table.  
@@ -46,12 +46,12 @@ The following Power BI features were incorporated:
 •	Separate the date and time in Order Date and Time column , in Power query editor using Split column option and delete the extra date column and rename column as Time.  
 
 •	Create a Time_Key column in Table view of Sales_Data table and the formula used is:  
-      Time_Key = Format([Time],"hhmm")  
+      _Time_Key = Format([Time],"hhmm")_    
   (used to fetch the grain of the data by fetching the hour:minute.)    
   
 •	Time table is created for hour extended analysis in Table view  
 
-            Time =  
+            _Time =  
             
                   VAR _series = 
                   
@@ -70,7 +70,7 @@ The following Power BI features were incorporated:
                           "Hour Extended", FORMAT( [TimeandDay], "H AM/PM"),
                           "Minute", MINUTE ( [TimeandDay] ),
                           "AMPM", FORMAT ( [TimeandDay], "AM/PM" )
-                      )
+                      )_  
 
 
 ## Functions/Formula used  
@@ -105,16 +105,16 @@ The following Power BI features were incorporated:
 
 - Last Refresh date table is created:  
         1.	Created a blank query in Power query editor and used the below function in fx:  
-              = DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.FixedLocalNow(),2))  
+              _= DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.FixedLocalNow(),2))_   
         2.	Convert the list to table  
         3.	Rename the table name to ‘Last Refresh’ and rename the column name to ‘Last Refresh Date Time’  
         4.	Duplicate the column and name it as ‘Last Refresh Date’ and update the data type to Date  
         5.	Again, duplicate the column and name it  ‘Last Refresh Time’ and update the data type to Time  
         6.	Create DAX measure as follows under Last Refresh table:   
                   a.	DATE LAST REFRESHED MEASURE:  
-                      Date Last Refreshed = VALUES('Last Refresh'[Last Refresh Date])  
+                      _Date Last Refreshed = VALUES('Last Refresh'[Last Refresh Date])_    
                   b.	DATE TIME LAST REFRESHED MEASURE:  
-                      DateTime Last Refreshed = VALUES('Last Refresh'[Last Refresh Date Time])    
+                      _DateTime Last Refreshed = VALUES('Last Refresh'[Last Refresh Date Time])_      
 
 ## Data Modelling  
 The Relationship and the Data model are shown in the below screenshots:  
@@ -127,7 +127,7 @@ Relationship                  |     Data-model
 ## Data Source  
 
 In this project, you will explore a substantial sales dataset to uncover valuable insights.  The dataset comprises 185,950 rows and 11 columns.   
-Additionally, a new column called "Unit_Cost" was introduced in the Excel sheet using the =Randombetween() function, and the data was subsequently refreshed in Power BI. This newly created column plays a crucial role in calculating the profit margin.  
+Additionally, a new column called "Unit_Cost" was introduced in the Excel sheet using the _=Randombetween()_ function, and the data was subsequently refreshed in Power BI. This newly created column plays a crucial role in calculating the profit margin.  
 
 ## Data Transformation/Cleaning 
 
